@@ -144,12 +144,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="src\classes\BoidManager.cpp" />
     <ClCompile Include="src\classes\Boid.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\classes\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="src\classes\BoidManager.h" />
     <ClInclude Include="src\classes\Boid.h" />
     <ClInclude Include="src\classes\UIManager.h" />
