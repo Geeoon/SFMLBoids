@@ -9,4 +9,4 @@ Boid follow 3 basic rules:
           * Cohesion
               * steer to move towards the average position (center of mass) of local flockmates
 
-If you want to know more about how Boids work, visit the [wikipeida page https://en.wikipedia.org/wiki/Boids].
+If you want to know more about how Boids work, visit the [wikipeida page](https://en.wikipedia.org/wiki/Boids).
