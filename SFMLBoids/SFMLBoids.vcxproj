@@ -144,17 +144,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="src\classes\Scene.cpp" />
     <ClCompile Include="src\classes\BoidManager.cpp" />
     <ClCompile Include="src\classes\Boid.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\classes\UIManager.cpp" />
+    <ClCompile Include="src\classes\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="src\classes\Scene.h" />
     <ClInclude Include="src\classes\BoidManager.h" />
     <ClInclude Include="src\classes\Boid.h" />
     <ClInclude Include="src\classes\UIManager.h" />
+    <ClInclude Include="src\classes\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,6 +10,7 @@ public:
 private:
 	float x;
 	float y;
+
 	const float magnitude;
 	float direction; //degrees, where 0 degrees is pointing to the left
 };
