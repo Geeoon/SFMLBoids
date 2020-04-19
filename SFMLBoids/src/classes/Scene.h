@@ -1,14 +1,17 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "UIManager.h"
 #include "BoidManager.h"
-#include <SFML/Graphics.hpp>
+
 
 class Scene
 {
 public:
-
+	Scene();
+	~Scene();
+	void start();
+	void end();
 private:
-	sf::RenderWindow window;
 	UIManager ui;
 	BoidManager boids;
 };
