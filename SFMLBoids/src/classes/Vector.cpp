@@ -1,7 +1,20 @@
 #include "Vector.h"
 
+Vector::Vector() {
+	direction = 0;
+	magnitude = 0;
+}
+
 Vector::Vector(float dir, float mag) {
 	direction = dir;
+	magnitude = mag;
+}
+
+void Vector::setDirection(float dir) {
+	direction = dir;
+}
+
+void Vector::setMagnitude(float mag) {
 	magnitude = mag;
 }
 

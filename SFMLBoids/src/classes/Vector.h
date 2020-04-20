@@ -5,7 +5,10 @@
 class Vector
 {
 public:
+	Vector();
 	Vector(float dir, float mag);
+	void setDirection(float dir); //direction 0 is strait down
+	void setMagnitude(float mag);
 	float getXComponent();
 	float getYComponent();
 	float getMagnitude();
