@@ -4,7 +4,7 @@ Boid::Boid() {
 	x = 0;
 	y = 0;
 	velocity.setDirection(90);
-	velocity.setMagnitude(0.1);
+	velocity.setMagnitude(0.1f);
 	triangle.setPointCount(3); //triangle
 	triangle.setRadius(10);
 	triangle.setFillColor(sf::Color::Black);
