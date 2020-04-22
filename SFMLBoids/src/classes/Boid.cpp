@@ -25,7 +25,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 			angle = angle * (double)(180 / M_PI); //convert from radians to degrees
 			
 			if (dist <= 50) {
-				seperation.addTo(Vector(angle, 5 / dist));
+				seperation.addTo(Vector(angle, 500 / (dist * dist)));
 			}
 		}
 	}
@@ -57,8 +57,8 @@ void Boid::update(std::vector<Boid>& boids, double time) {
 	}
 	avrgDir /= boids.size();
 	*/
-	velocity.addTo(separation(boids));
-
+	//velocity.addTo(separation(boids));
+	velocity.addTo(Vector(270, 1));
 	x += velocity.getXComponent() * time;
 	y -= velocity.getYComponent() * time;
 	triangle.setPosition(x, y);
