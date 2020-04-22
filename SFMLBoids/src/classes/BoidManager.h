@@ -10,7 +10,9 @@ public:
 	void update();
 	void draw(sf::RenderWindow& window);
 private:
+	sf::Clock clock;
+	sf::Time elapsedTime;
 	std::vector<Boid> boids;
-	const int numBoids = 1;
+	const int numBoids = 5;
 };
 

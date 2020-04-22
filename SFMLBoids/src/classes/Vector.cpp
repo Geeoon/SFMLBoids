@@ -5,43 +5,45 @@ Vector::Vector() {
 	magnitude = 0;
 }
 
-Vector::Vector(float dir, float mag) {
+Vector::Vector(double dir, double mag) {
 	direction = dir;
 	magnitude = mag;
 }
 
-void Vector::setDirection(float dir) {
+void Vector::setDirection(double dir) {
 	direction = dir;
 }
 
-void Vector::setMagnitude(float mag) {
+void Vector::setMagnitude(double mag) {
 	magnitude = mag;
 }
 
-float Vector::getXComponent() {
+double Vector::getXComponent() {
 	return magnitude * sin(getDirectionRad());
 }
 
-float Vector::getYComponent() {
+double Vector::getYComponent() {
 	return magnitude * cos(getDirectionRad());
 }
 
-float Vector::getMagnitude() {
+double Vector::getMagnitude() {
 	return magnitude;
 }
 
-float Vector::getDirectionDeg() {
+double Vector::getDirectionDeg() {
 	return direction;
 }
 
-float Vector::getDirectionRad() {
+double Vector::getDirectionRad() {
 	return direction * M_PI / 180;
 }
 
-Vector Vector::addTo(Vector vector2) {
-	float newX = vector2.getXComponent() + getXComponent();
-	float newY = vector2.getYComponent() + getYComponent();
-	float newMagnitude = sqrt((newX * newX) + (newY * newY));
-	float newDirection = atan2f(newY, newX);
-	return Vector(newDirection, newMagnitude);
+void Vector::addTo(Vector vector2) {
+	double newX = vector2.getXComponent() + getXComponent();
+	double newY = vector2.getYComponent() + getYComponent();
+	double newMagnitude = sqrt((newX * newX) + (newY * newY));
+	double newDirection = atan2f(newY, newX);
+	newDirection = newDirection * (double)(180 / M_PI) + 90;
+	direction = newDirection;
+	magnitude = newMagnitude;
 }
