@@ -16,6 +16,7 @@ public:
 	double getDirectionDeg();
 	double getDirectionRad();
 	void addTo(Vector vector2);
+	Vector add(Vector vector2);
 private:
 	double direction;
 	double magnitude;

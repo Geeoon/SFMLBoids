@@ -15,17 +15,27 @@ Boid::Boid() {
 
 Vector Boid::separation(std::vector<Boid>& boids) {
 	//separation
-	Vector seperation;
+	Vector seperation(0, 0);
 	for (int i = 0; i < boids.size(); i++) { //it jitters becasue I have no clue
 		if (&boids[i] != this) {
 			double xDist = x - boids[i].getX();
 			double yDist = y - boids[i].getY();
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
-			double angle = atan2f(yDist, xDist);
-			angle = angle * (double)(180 / M_PI); //convert from radians to degrees
+
 			
 			if (dist <= 50) {
-				seperation.addTo(Vector(angle, 500 / (dist * dist)));
+				double angle = 0;
+				if (yDist >= 0 && xDist >= 0) {
+					angle = atan(yDist / xDist);
+				} else if (yDist >= 0 && xDist < 0) {
+					angle = 180 - atan(yDist / xDist);
+				} else if (yDist < 0 && xDist >= 0) {
+					angle = 360 - atan(yDist / xDist);
+				} else {
+					angle = 270 - atan(yDist / xDist);
+				}
+				angle = angle * (double)(180 / M_PI); //convert from radians to degrees
+				seperation.addTo(Vector(-angle, 20 / (dist * dist)));
 			}
 		}
 	}
@@ -57,13 +67,11 @@ void Boid::update(std::vector<Boid>& boids, double time) {
 	}
 	avrgDir /= boids.size();
 	*/
-	//velocity.addTo(separation(boids));
-	velocity.addTo(Vector(270, 1));
+	velocity.addTo(separation(boids));
 	x += velocity.getXComponent() * time;
 	y -= velocity.getYComponent() * time;
 	triangle.setPosition(x, y);
 	triangle.setRotation(velocity.getDirectionDeg());
-	std::cout << velocity.getDirectionDeg() << std::endl;
 }
 
 Vector Boid::getVelocity() {

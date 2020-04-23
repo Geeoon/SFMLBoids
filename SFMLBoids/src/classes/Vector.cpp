@@ -18,11 +18,11 @@ void Vector::setMagnitude(double mag) {
 	magnitude = mag;
 }
 
-double Vector::getXComponent() {
+double Vector::getYComponent() {
 	return magnitude * sin(getDirectionRad());
 }
 
-double Vector::getYComponent() {
+double Vector::getXComponent() {
 	return magnitude * cos(getDirectionRad());
 }
 
@@ -42,8 +42,52 @@ void Vector::addTo(Vector vector2) {
 	double newX = vector2.getXComponent() + getXComponent();
 	double newY = vector2.getYComponent() + getYComponent();
 	double newMagnitude = sqrt((newX * newX) + (newY * newY));
-	double newDirection = atan2f(newY, newX);
-	newDirection = newDirection * (double)(180 / M_PI) + 90;
+	double newDirection = 0;
+
+	if (newY == 0 && newX > 0) {
+		newDirection = 0;
+	} else if (newY > 0 && newX == 0) {
+		newDirection = 90;
+	} else if (newY == 0 && newX < 0) {
+		newDirection = 180;
+	} else if (newY < 0 && newX == 0) {
+		newDirection = 270;
+	} else if (newY > 0 && newX > 0) {//first quad
+		newDirection = atan(newY / newX) * 180 / M_PI;
+	} else if (newY > 0 && newX < 0) {//second quad
+		newDirection = 180 + (atan(newY / newX) * 180 / M_PI);
+	} else if (newY < 0 && newX < 0) {//third quad
+		newDirection = 270 - (atan(newY / newX) * 180 / M_PI);
+	} else if (newY < 0 && newX > 0) {//fourth quad
+		newDirection = 360 + (atan(newY / newX) * 180 / M_PI);
+	}
+
 	direction = newDirection;
 	magnitude = newMagnitude;
+}
+
+Vector Vector::add(Vector vector2) {
+	double newX = vector2.getXComponent() + getXComponent();
+	double newY = vector2.getYComponent() + getYComponent();
+	double newMagnitude = sqrt((newX * newX) + (newY * newY));
+	double newDirection = 0;
+
+	if (newY == 0 && newX > 0) {
+		newDirection = 0;
+	} else if (newY > 0 && newX == 0) {
+		newDirection = 90;
+	} else if (newY == 0 && newX < 0) {
+		newDirection = 180;
+	} else if (newY < 0 && newX == 0) {
+		newDirection = 270;
+	} else if (newY > 0 && newX > 0) {//first quad
+		newDirection = atan(newY / newX) * 180 / M_PI;
+	} else if (newY > 0 && newX < 0) {//second quad
+		newDirection = 180 + (atan(newY / newX) * 180 / M_PI);
+	} else if (newY < 0 && newX < 0) {//third quad
+		newDirection = 270 - (atan(newY / newX) * 180 / M_PI);
+	} else if (newY < 0 && newX > 0) {//fourth quad
+		newDirection = 360 + (atan(newY / newX) * 180 / M_PI);
+	}
+	return Vector(newDirection, newMagnitude);
 }

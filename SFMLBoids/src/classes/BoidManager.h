@@ -13,6 +13,6 @@ private:
 	sf::Clock clock;
 	sf::Time elapsedTime;
 	std::vector<Boid> boids;
-	const int numBoids = 5;
+	const int numBoids = 2;
 };
 

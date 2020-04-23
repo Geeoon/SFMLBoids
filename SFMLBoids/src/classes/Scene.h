@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "UIManager.h"
 #include "BoidManager.h"
-
+#include "Vector.h"
 
 class Scene
 {

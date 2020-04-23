@@ -4,8 +4,8 @@ BoidManager::BoidManager() {
 
 	boids.resize(numBoids);
 	for (int i = 0; i < numBoids; i++) {
-		boids[i].setX(300 + 20*i);
-		boids[i].setY(300);
+		boids[i].setX(300);
+		boids[i].setY(300 + 20 * i);
 	}
 }
 
