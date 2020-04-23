@@ -23,23 +23,30 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 			
-			if (dist <= 50) {
+			if (dist <= 30) {
 				double angle = 0;
-				if (yDist >= 0 && xDist >= 0) {
-					angle = atan(yDist / xDist);
-				} else if (yDist >= 0 && xDist < 0) {
-					angle = 180 - atan(yDist / xDist);
-				} else if (yDist < 0 && xDist >= 0) {
-					angle = 360 - atan(yDist / xDist);
-				} else {
-					angle = 270 - atan(yDist / xDist);
+				if (yDist == 0 && xDist > 0) {
+					angle = 0;
+				} else if (yDist > 0 && xDist == 0) {
+					angle = 90;
+				} else if (yDist == 0 && xDist < 0) {
+					angle = 180;
+				} else if (yDist < 0 && xDist == 0) {
+					angle = 270;
+				} else if (yDist > 0 && xDist > 0) {//first quad
+					angle = atan(yDist / xDist) * 180 / M_PI;
+				} else if (yDist > 0 && xDist < 0) {//second quad
+					angle = 180 + (atan(yDist / xDist) * 180 / M_PI);
+				} else if (yDist < 0 && xDist < 0) {//third quad
+					angle = 270 - (atan(yDist / xDist) * 180 / M_PI);
+				} else if (yDist < 0 && xDist > 0) {//fourth quad
+					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-				angle = angle * (double)(180 / M_PI); //convert from radians to degrees
-				seperation.addTo(Vector(-angle, 20 / (dist * dist)));
+
+				seperation.addTo(Vector(angle, 20 / (dist * dist)));
 			}
 		}
 	}
-	
 	return seperation;
 }
 
@@ -68,8 +75,9 @@ void Boid::update(std::vector<Boid>& boids, double time) {
 	avrgDir /= boids.size();
 	*/
 	velocity.addTo(separation(boids));
+
 	x += velocity.getXComponent() * time;
-	y -= velocity.getYComponent() * time;
+	y += velocity.getYComponent() * time;
 	triangle.setPosition(x, y);
 	triangle.setRotation(velocity.getDirectionDeg());
 }
