@@ -15,12 +15,16 @@ public:
 	double getY();
 	void setX(double newX);
 	void setY(double newY);
+	void teleportEdge(sf::RenderWindow& window);
 	sf::CircleShape getSprite();
 private:
 	sf::CircleShape triangle; //says cirlceshape but it gets modified in the constructor to be a triangle
 	Vector separation(std::vector<Boid>& boids);
 	Vector alignment(std::vector<Boid>& boids);
 	Vector cohesion(std::vector<Boid>& boids);
+	Vector avoidEdge(std::vector<Boid>& boids);
+	
+	void capSpeed();
 	double x;
 	double y;
 	Vector velocity;
