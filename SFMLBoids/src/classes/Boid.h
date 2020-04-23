@@ -28,5 +28,14 @@ private:
 	double x;
 	double y;
 	Vector velocity;
+
+	const double seperationFactor = 10; //10
+	const double cohesionFactor = 15; //0.5
+	const double alignmentFactor = 0.00002; //0.00002
+	const double acceleration = 30;
+	const double seperationRadius = 20;
+	const double adhesionRadius = 500;
+	const double alignmentRadius = 100;
+
 };
 

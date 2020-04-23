@@ -24,7 +24,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 			
-			if (dist <= 20) {
+			if (dist <= seperationRadius) {
 				double angle = 0;
 				if (yDist == 0 && xDist > 0) {
 					angle = 0;
@@ -44,7 +44,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
 
-				seperation.addTo(Vector(angle, 10 / (dist*dist)));
+				seperation.addTo(Vector(angle, seperationFactor / (dist*dist)));
 			}
 		}
 	}
@@ -64,7 +64,7 @@ Vector Boid::alignment(std::vector<Boid>& boids) {
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 
-			if (dist <= 50) {
+			if (dist <= alignmentRadius) { //50
 				count++;
 				averageAngle += getVelocity().getDirectionDeg() - boids[i].getVelocity().getDirectionDeg();
 			}
@@ -76,9 +76,9 @@ Vector Boid::alignment(std::vector<Boid>& boids) {
 	}
 
 	if (averageAngle > 0) {
-		alignment.addTo(Vector(getVelocity().getDirectionDeg() - 90, averageAngle * 0.00002));
+		alignment.addTo(Vector(getVelocity().getDirectionDeg() - 90, averageAngle * alignmentFactor));
 	} else if (averageAngle < 0) {
-		alignment.addTo(Vector(getVelocity().getDirectionDeg() + 90, averageAngle * 0.00002));
+		alignment.addTo(Vector(getVelocity().getDirectionDeg() + 90, averageAngle * alignmentFactor));
 	}
 
 	return alignment;
@@ -97,7 +97,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 
-			if (dist <= 200) {
+			if (dist <= adhesionRadius) { //200
 				count++;
 				avrgX += boids[i].getX();
 				avrgY += boids[i].getY();
@@ -131,7 +131,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	}
 
 	angle += 180;
-	cohesion.addTo(Vector(angle, .5));
+	cohesion.addTo(Vector(angle, cohesionFactor));
 
 	return cohesion;
 }
@@ -162,7 +162,7 @@ void Boid::capSpeed() {
 	if (velocity.getMagnitude() > 300) {
 		velocity.setMagnitude(300);
 	} else {
-		velocity.addTo(Vector(velocity.getDirectionDeg(), .5));
+		velocity.addTo(Vector(velocity.getDirectionDeg(), acceleration));
 	}
 }
 
