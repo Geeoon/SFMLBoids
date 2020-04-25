@@ -11,12 +11,16 @@ Boid::Boid() {
 	triangle.setOrigin(triangle.getRadius(), triangle.getRadius());
 	triangle.setOutlineColor(sf::Color(0, 255, 65));
 	triangle.setOutlineThickness(2);
-	triangle.scale(1.0f, 1.25f);
+	triangle.scale(1.0f, 2.25f);
 }
 
 Vector Boid::separation(std::vector<Boid>& boids) {
 	//separation
+	
 	Vector seperation(0, 0);
+	double finalX = 0;
+	double finalY = 0;
+
 	for (int i = 0; i < boids.size(); i++) {
 		if (&boids[i] != this) {
 			double xDist = x - boids[i].getX();
@@ -43,7 +47,6 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-
 				seperation.addTo(Vector(angle, seperationFactor / (dist*dist)));
 			}
 		}
@@ -52,7 +55,8 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 }
 
 Vector Boid::alignment(std::vector<Boid>& boids) {
-	//separation
+	//alignment
+	
 	Vector alignment(0, 0);
 	double averageAngle = 0;
 	int count = 0;
@@ -108,8 +112,9 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	avrgY /= count;
 
 
-	double xDist = x - avrgX;
-	double yDist = y - avrgY;
+	double xDist = avrgX;
+	double yDist = avrgY;
+	double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 	double angle = 0;
 	if (yDist == 0 && xDist > 0) {
@@ -131,7 +136,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	}
 
 	angle += 180;
-	cohesion.addTo(Vector(angle, cohesionFactor));
+	cohesion.addTo(Vector(angle, dist / cohesionFactor));
 
 	return cohesion;
 }
@@ -160,7 +165,7 @@ void Boid::teleportEdge(sf::RenderWindow& window) {
 
 void Boid::capSpeed() {
 	if (velocity.getMagnitude() > 300) {
-		velocity.setMagnitude(300);
+		velocity.addTo(Vector(velocity.getDirectionDeg() + 180, velocity.getMagnitude() - 300));
 	} else {
 		velocity.addTo(Vector(velocity.getDirectionDeg(), acceleration));
 	}

@@ -3,5 +3,6 @@
 
 int main() {
 	Scene boidScene;
+	boidScene.start();
 	return 0;
 }

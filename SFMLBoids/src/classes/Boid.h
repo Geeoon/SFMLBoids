@@ -30,12 +30,13 @@ private:
 	Vector velocity;
 
 	const double seperationFactor = 10; //10
-	const double cohesionFactor = 15; //0.5
+	const double cohesionFactor = 1000; //0.5;\
+									    cohesion causes jittering nad forces the boids to go up and to the left
 	const double alignmentFactor = 0.00002; //0.00002
-	const double acceleration = 30;
+	const double acceleration = 5;
 	const double seperationRadius = 20;
-	const double adhesionRadius = 500;
-	const double alignmentRadius = 100;
+	const double adhesionRadius = 100;
+	const double alignmentRadius = 50;
 
 };
 
