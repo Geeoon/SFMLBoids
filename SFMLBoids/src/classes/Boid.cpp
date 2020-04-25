@@ -43,7 +43,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist > 0 && xDist < 0) {//second quad
 					angle = 180 + (atan(yDist / xDist) * 180 / M_PI);
 				} else if (yDist < 0 && xDist < 0) {//third quad
-					angle = 270 - (atan(yDist / xDist) * 180 / M_PI);
+					angle = 270 - (atan(xDist / yDist) * 180 / M_PI);
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
@@ -97,19 +97,22 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	for (int i = 0; i < boids.size(); i++) {
 		if (&boids[i] != this) {
 			double xDist = x - boids[i].getX();
-			double yDist = y - boids[i].getY();
+			double yDist = boids[i].getY() - y;
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
 
 			if (dist <= adhesionRadius) { //200
 				count++;
 				avrgX += boids[i].getX();
-				avrgY += boids[i].getY();
+				avrgY -= boids[i].getY();
 			}
 		}
 	}
-	avrgX /= count;
-	avrgY /= count;
+	if (count != 0) {
+		avrgX /= count;
+		avrgY /= count;
+	}
+
 
 
 	double xDist = avrgX;
@@ -130,7 +133,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	} else if (yDist > 0 && xDist < 0) {//second quad
 		angle = 180 + (atan(yDist / xDist) * 180 / M_PI);
 	} else if (yDist < 0 && xDist < 0) {//third quad
-		angle = 270 - (atan(yDist / xDist) * 180 / M_PI);
+		angle = 270 - (atan(xDist / yDist) * 180 / M_PI);
 	} else if (yDist < 0 && xDist > 0) {//fourth quad
 		angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 	}
@@ -179,7 +182,7 @@ void Boid::update(std::vector<Boid>& boids, double time) {
 	x += velocity.getXComponent() * time;
 	y += velocity.getYComponent() * time;
 	triangle.setPosition(x, y);
-	triangle.setRotation(velocity.getDirectionDeg()+90);
+	triangle.setRotation(velocity.getDirectionDeg() + 90);
 }
 
 Vector Boid::getVelocity() {
