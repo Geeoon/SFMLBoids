@@ -11,7 +11,7 @@ Boid::Boid() {
 	triangle.setOrigin(triangle.getRadius(), triangle.getRadius());
 	triangle.setOutlineColor(sf::Color(0, 255, 65));
 	triangle.setOutlineThickness(2);
-	triangle.scale(1.0f, 2.25f);
+	triangle.scale(1.0f, 1.25f);
 }
 
 Vector Boid::separation(std::vector<Boid>& boids) {
@@ -96,7 +96,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	int count = 0;
 	for (int i = 0; i < boids.size(); i++) {
 		if (&boids[i] != this) {
-			double xDist = x - boids[i].getX();
+			double xDist = boids[i].getX() - x;
 			double yDist = boids[i].getY() - y;
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
@@ -104,7 +104,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 			if (dist <= adhesionRadius) { //200
 				count++;
 				avrgX += boids[i].getX();
-				avrgY -= boids[i].getY();
+				avrgY += boids[i].getY();
 			}
 		}
 	}
@@ -175,8 +175,8 @@ void Boid::capSpeed() {
 }
 
 void Boid::update(std::vector<Boid>& boids, double time) {
-	velocity.addTo(separation(boids));
-	velocity.addTo(alignment(boids));
+	//velocity.addTo(separation(boids));
+	//velocity.addTo(alignment(boids));
 	velocity.addTo(cohesion(boids));
 	capSpeed();
 	x += velocity.getXComponent() * time;
