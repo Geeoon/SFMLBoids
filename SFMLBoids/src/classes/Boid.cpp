@@ -47,7 +47,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-				seperation.addTo(Vector(angle, seperationFactor / (dist*dist)));
+				seperation.addTo(Vector(angle, seperationFactor / dist));
 			}
 		}
 	}
@@ -67,8 +67,7 @@ Vector Boid::alignment(std::vector<Boid>& boids) {
 			double yDist = y - boids[i].getY();
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
-
-			if (dist <= alignmentRadius) { //50
+			if (dist <= alignmentRadius && velocity.g > 210 && angle ) { //50
 				count++;
 				averageAngle += getVelocity().getDirectionDeg() - boids[i].getVelocity().getDirectionDeg();
 			}
@@ -99,6 +98,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 			double xDist = boids[i].getX() - x;
 			double yDist = boids[i].getY() - y;
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
+
 
 
 			if (dist <= adhesionRadius) { //200
@@ -139,8 +139,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 		angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 	}
 
-	angle += 180;
-	cohesion.addTo(Vector(angle, -dist / cohesionFactor));
+	cohesion.addTo(Vector(angle, dist / cohesionFactor));
 
 	return cohesion;
 }
@@ -176,8 +175,8 @@ void Boid::capSpeed() {
 }
 
 void Boid::update(std::vector<Boid>& boids, double time) {
-	velocity.addTo(separation(boids));
-	velocity.addTo(alignment(boids));
+	//velocity.addTo(separation(boids));
+	//velocity.addTo(alignment(boids));
 	velocity.addTo(cohesion(boids));
 	capSpeed();
 	x += velocity.getXComponent() * time;

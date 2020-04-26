@@ -30,8 +30,8 @@ private:
 	Vector velocity;
 
 	const double seperationFactor = 10; //10
-	const double cohesionFactor = 100; //100;
-	const double alignmentFactor = 0.00002; //0.00002
+	const double cohesionFactor = 50; //100;
+	const double alignmentFactor = 0.0002; //0.00002
 	const double acceleration = 5;
 	const double seperationRadius = 20;
 	const double adhesionRadius = 100;
