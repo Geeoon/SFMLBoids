@@ -103,11 +103,12 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 
 			if (dist <= adhesionRadius) { //200
 				count++;
-				avrgX += boids[i].getX();
-				avrgY += boids[i].getY();
+				avrgX += xDist;
+				avrgY += yDist;
 			}
 		}
 	}
+
 	if (count != 0) {
 		avrgX /= count;
 		avrgY /= count;
@@ -139,7 +140,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	}
 
 	angle += 180;
-	cohesion.addTo(Vector(angle, dist / cohesionFactor));
+	cohesion.addTo(Vector(angle, -dist / cohesionFactor));
 
 	return cohesion;
 }
@@ -168,15 +169,15 @@ void Boid::teleportEdge(sf::RenderWindow& window) {
 
 void Boid::capSpeed() {
 	if (velocity.getMagnitude() > 300) {
-		velocity.addTo(Vector(velocity.getDirectionDeg() + 180, velocity.getMagnitude() - 300));
+		velocity.addTo(Vector(velocity.getDirectionDeg(), 300 - velocity.getMagnitude()));
 	} else {
 		velocity.addTo(Vector(velocity.getDirectionDeg(), acceleration));
 	}
 }
 
 void Boid::update(std::vector<Boid>& boids, double time) {
-	//velocity.addTo(separation(boids));
-	//velocity.addTo(alignment(boids));
+	velocity.addTo(separation(boids));
+	velocity.addTo(alignment(boids));
 	velocity.addTo(cohesion(boids));
 	capSpeed();
 	x += velocity.getXComponent() * time;

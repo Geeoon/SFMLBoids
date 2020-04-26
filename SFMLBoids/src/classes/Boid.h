@@ -30,7 +30,7 @@ private:
 	Vector velocity;
 
 	const double seperationFactor = 10; //10
-	const double cohesionFactor = 100; //100; cohesion forces the boids to go up and to the left
+	const double cohesionFactor = 100; //100;
 	const double alignmentFactor = 0.00002; //0.00002
 	const double acceleration = 5;
 	const double seperationRadius = 20;
