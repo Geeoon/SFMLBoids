@@ -47,7 +47,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-				seperation.addTo(Vector(angle, seperationFactor / dist));
+				seperation.addTo(Vector(angle, dist / seperationFactor));
 			}
 		}
 	}
@@ -101,7 +101,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 
 
 
-			if (dist <= adhesionRadius) { //200
+			if (dist <= cohesionRadius) { //200
 				count++;
 				avrgX += xDist;
 				avrgY += yDist;
@@ -175,7 +175,7 @@ void Boid::capSpeed() {
 }
 
 void Boid::update(std::vector<Boid>& boids, double time) {
-	//velocity.addTo(separation(boids));
+	velocity.addTo(separation(boids));
 	//velocity.addTo(alignment(boids));
 	velocity.addTo(cohesion(boids));
 	capSpeed();
