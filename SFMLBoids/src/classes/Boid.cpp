@@ -47,7 +47,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-				seperation.addTo(Vector(angle, dist / seperationFactor));
+				seperation.addTo(Vector(angle, (dist / seperationFactor) + 2));
 			}
 		}
 	}
@@ -167,8 +167,8 @@ void Boid::teleportEdge(sf::RenderWindow& window) {
 }
 
 void Boid::capSpeed() {
-	if (velocity.getMagnitude() > 300) {
-		velocity.addTo(Vector(velocity.getDirectionDeg(), 300 - velocity.getMagnitude()));
+	if (velocity.getMagnitude() > maxSpeed) {
+		velocity.addTo(Vector(velocity.getDirectionDeg(), maxSpeed - velocity.getMagnitude()));
 	} else {
 		velocity.addTo(Vector(velocity.getDirectionDeg(), acceleration));
 	}
