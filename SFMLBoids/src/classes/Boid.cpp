@@ -47,7 +47,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 				} else if (yDist < 0 && xDist > 0) {//fourth quad
 					angle = 360 + (atan(yDist / xDist) * 180 / M_PI);
 				}
-				seperation.addTo(Vector(angle, (dist / seperationFactor) + 2));
+				seperation.addTo(Vector(angle, (dist / seperationFactor) + (1/dist * 10) + 2));
 			}
 		}
 	}
@@ -78,9 +78,9 @@ Vector Boid::alignment(std::vector<Boid>& boids) {
 		averageAngle /= count;
 	}
 
-	if (averageAngle > 0) {
-		alignment.addTo(Vector(getVelocity().getDirectionDeg() - 90, averageAngle * alignmentFactor));
-	} else if (averageAngle < 0) {
+	if (averageAngle < 0) {
+		alignment.addTo(Vector(getVelocity().getDirectionDeg() + 90, averageAngle * alignmentFactor));
+	} else if (averageAngle > 0) {
 		alignment.addTo(Vector(getVelocity().getDirectionDeg() + 90, averageAngle * alignmentFactor));
 	}
 
