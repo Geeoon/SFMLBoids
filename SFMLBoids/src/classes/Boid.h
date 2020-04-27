@@ -22,8 +22,7 @@ private:
 	Vector separation(std::vector<Boid>& boids);
 	Vector alignment(std::vector<Boid>& boids);
 	Vector cohesion(std::vector<Boid>& boids);
-	Vector avoidEdge(std::vector<Boid>& boids);
-	
+	Vector avoidEdge(sf::RenderWindow& window);
 	Vector capSpeed();
 	double x;
 	double y;
@@ -38,8 +37,8 @@ private:
 	const double alignmentFactor = 0.01; //0.01
 	const double acceleration = 1;//1
 	const double seperationRadius = 30;//25
-	const double cohesionRadius = 100;//100
-	const double alignmentRadius = 75;//50
+	const double cohesionRadius = 200;//100
+	const double alignmentRadius = 150;//50
 	const double maxSpeed = 300;//300
 
 };

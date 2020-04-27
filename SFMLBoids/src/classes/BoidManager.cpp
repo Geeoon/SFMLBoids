@@ -2,9 +2,11 @@
 
 BoidManager::BoidManager() {
 	boids.resize(cols * rows);
-	for (size_t i = 0; i < boids.size(); i++) {
-		boids[i].setX(100 + i * 5);
-		boids[i].setY(100);
+	for (int i = 0; i < cols; i++) {
+		for (int j = 0; j < rows; j++) {
+			boids[i*rows + j].setX(100 + i * 10);
+			boids[i*rows + j].setY(100 + j * 10);
+		}
 	}
 }
 
