@@ -24,7 +24,7 @@ private:
 	Vector cohesion(std::vector<Boid>& boids);
 	Vector avoidEdge(std::vector<Boid>& boids);
 	
-	void capSpeed();
+	Vector capSpeed();
 	double x;
 	double y;
 	Vector velocity;
@@ -32,6 +32,7 @@ private:
 	/*issues I need to fix:
 		boids like to overlap
 	*/
+	const double scale = .5;
 	const double seperationFactor = 5; //5
 	const double cohesionFactor = 15; //25
 	const double alignmentFactor = 0.01; //0.01
