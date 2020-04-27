@@ -33,12 +33,12 @@ private:
 		boids like to overlap
 	*/
 	const double seperationFactor = 5; //5
-	const double cohesionFactor = 25; //25
+	const double cohesionFactor = 15; //25
 	const double alignmentFactor = 0.01; //0.01
 	const double acceleration = 1;//1
 	const double seperationRadius = 30;//25
-	const double cohesionRadius = 300;//100
-	const double alignmentRadius = 200;//50
+	const double cohesionRadius = 100;//100
+	const double alignmentRadius = 75;//50
 	const double maxSpeed = 300;//300
 
 };
