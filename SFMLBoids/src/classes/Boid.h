@@ -9,6 +9,7 @@ class Boid
 {
 public:
 	Boid();
+	Boid(double s);
 	void update(std::vector<Boid>& boids, double time);
 	Vector getVelocity();
 	double getX();
@@ -31,15 +32,14 @@ private:
 	/*issues I need to fix:
 		boids like to overlap
 	*/
-	const double scale = .5;
-	const double seperationFactor = 5; //5
-	const double cohesionFactor = 15; //25
-	const double alignmentFactor = 0.01; //0.01
-	const double acceleration = 1;//1
-	const double seperationRadius = 30;//25
-	const double cohesionRadius = 200;//100
-	const double alignmentRadius = 150;//50
-	const double maxSpeed = 300;//300
-
+	double scale = .5;
+	double seperationFactor = 5; //5
+	double cohesionFactor = 15; //25
+	double alignmentFactor = 0.01; //0.01
+	double acceleration = 1;//1
+	double seperationRadius = 30;//25
+	double cohesionRadius = 200;//100
+	double alignmentRadius = 150;//50
+	double maxSpeed = 300;//300
 };
 

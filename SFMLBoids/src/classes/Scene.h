@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "UIManager.h"
 #include "BoidManager.h"
-#include "Vector.h"
+#include <iostream>
 
 class Scene
 {
@@ -11,9 +11,11 @@ public:
 	~Scene();
 	void start();
 	void end();
+	void input();
 private:
 	UIManager ui;
-	BoidManager boids;
+	std::unique_ptr<BoidManager> boids;
 	bool click = false;
+	double scale = 1;
 };
 

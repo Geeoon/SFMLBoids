@@ -14,6 +14,21 @@ Boid::Boid() {
 	triangle.scale(1.0f, 1.25f);
 }
 
+Boid::Boid(double s) {
+	scale = s;
+	x = 300;
+	y = 300;
+	velocity.setDirection(0);
+	velocity.setMagnitude(10);
+	triangle.setPointCount(3); //triangle
+	triangle.setRadius(5 * scale);
+	triangle.setFillColor(sf::Color::Black);
+	triangle.setOrigin(triangle.getRadius(), triangle.getRadius());
+	triangle.setOutlineColor(sf::Color(0, 255, 65));
+	triangle.setOutlineThickness(1);
+	triangle.scale(1.0f, 1.25f);
+}
+
 Vector Boid::separation(std::vector<Boid>& boids) {
 	//separation
 	

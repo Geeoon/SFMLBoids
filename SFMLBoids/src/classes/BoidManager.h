@@ -7,6 +7,7 @@ class BoidManager
 {
 public:
 	BoidManager();
+	BoidManager(double s);
 	void update();
 	void draw(sf::RenderWindow& window);
 	void addBoid(double x, double y);
@@ -16,5 +17,6 @@ private:
 	std::vector<Boid> boids;
 	const int cols = 10;
 	const int rows = 10;
+	double scale = 1;
 };
 
