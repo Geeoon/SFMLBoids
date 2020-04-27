@@ -14,7 +14,7 @@ private:
 	sf::Clock clock;
 	sf::Time elapsedTime;
 	std::vector<Boid> boids;
-	const int cols = 5;
-	const int rows = 5;
+	const int cols = 0;
+	const int rows = 0;
 };
 

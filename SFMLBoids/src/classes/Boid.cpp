@@ -176,7 +176,7 @@ void Boid::capSpeed() {
 
 void Boid::update(std::vector<Boid>& boids, double time) {
 	velocity.addTo(separation(boids));
-	//velocity.addTo(alignment(boids));
+	velocity.addTo(alignment(boids));
 	velocity.addTo(cohesion(boids));
 	capSpeed();
 	x += velocity.getXComponent() * time;
