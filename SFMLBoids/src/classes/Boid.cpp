@@ -21,7 +21,7 @@ Vector Boid::separation(std::vector<Boid>& boids) {
 	double finalX = 0;
 	double finalY = 0;
 
-	for (int i = 0; i < boids.size(); i++) {
+	for (size_t i = 0; i < boids.size(); i++) {
 		if (&boids[i] != this) {
 			double xDist = x - boids[i].getX();
 			double yDist = y - boids[i].getY();
@@ -60,14 +60,14 @@ Vector Boid::alignment(std::vector<Boid>& boids) {
 	Vector alignment(0, 0);
 	double averageAngle = 0;
 	int count = 0;
-	for (int i = 0; i < boids.size(); i++) {
+	for (size_t i = 0; i < boids.size(); i++) {
 		
 		if (&boids[i] != this) {
 			double xDist = x - boids[i].getX();
 			double yDist = y - boids[i].getY();
 			double dist = sqrt((xDist * xDist) + (yDist * yDist));
 
-			if (dist <= alignmentRadius && velocity.g > 210 && angle ) { //50
+			if (dist <= alignmentRadius) { //50
 				count++;
 				averageAngle += getVelocity().getDirectionDeg() - boids[i].getVelocity().getDirectionDeg();
 			}
@@ -93,7 +93,7 @@ Vector Boid::cohesion(std::vector<Boid>& boids) {
 	double avrgX = 0;
 	double avrgY = 0;
 	int count = 0;
-	for (int i = 0; i < boids.size(); i++) {
+	for (size_t i = 0; i < boids.size(); i++) {
 		if (&boids[i] != this) {
 			double xDist = boids[i].getX() - x;
 			double yDist = boids[i].getY() - y;
@@ -181,8 +181,8 @@ void Boid::update(std::vector<Boid>& boids, double time) {
 	capSpeed();
 	x += velocity.getXComponent() * time;
 	y += velocity.getYComponent() * time;
-	triangle.setPosition(x, y);
-	triangle.setRotation(velocity.getDirectionDeg() + 90);
+	triangle.setPosition((float)x, (float)y);
+	triangle.setRotation((float)velocity.getDirectionDeg() + 90);
 }
 
 Vector Boid::getVelocity() {
@@ -205,6 +205,7 @@ void Boid::setY(double newY) {
 	y = newY;
 }
 
-sf::CircleShape Boid::getSprite() {
+sf::CircleShape& Boid::getSprite() {
 	return triangle;
+
 }

@@ -14,5 +14,6 @@ public:
 private:
 	UIManager ui;
 	BoidManager boids;
+	bool click = false;
 };
 

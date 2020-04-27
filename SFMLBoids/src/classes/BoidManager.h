@@ -9,6 +9,7 @@ public:
 	BoidManager();
 	void update();
 	void draw(sf::RenderWindow& window);
+	void addBoid(double x, double y);
 private:
 	sf::Clock clock;
 	sf::Time elapsedTime;

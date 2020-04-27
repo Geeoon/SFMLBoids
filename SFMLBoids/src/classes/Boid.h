@@ -16,7 +16,7 @@ public:
 	void setX(double newX);
 	void setY(double newY);
 	void teleportEdge(sf::RenderWindow& window);
-	sf::CircleShape getSprite();
+	sf::CircleShape& getSprite();
 private:
 	sf::CircleShape triangle; //says cirlceshape but it gets modified in the constructor to be a triangle
 	Vector separation(std::vector<Boid>& boids);
@@ -30,7 +30,7 @@ private:
 	Vector velocity;
 
 	const double seperationFactor = 10; //10
-	const double cohesionFactor = 50; //100;
+	const double cohesionFactor = 10; //100;
 	const double alignmentFactor = 0.0002; //0.00002
 	const double acceleration = 5;
 	const double seperationRadius = 20;
